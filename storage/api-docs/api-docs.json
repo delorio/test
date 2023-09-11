@@ -1,0 +1,45 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "My doc api",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/": {},
+        "/api/hello/{name}": {
+            "get": {
+                "tags": [
+                    "name"
+                ],
+                "summary": "Get hello name",
+                "operationId": "89ebbc2ffc5c579f49d4a74e4ff59251",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "Get hello name",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "hello Pavel"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

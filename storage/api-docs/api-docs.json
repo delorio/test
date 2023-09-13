@@ -13,7 +13,7 @@
                     "name"
                 ],
                 "summary": "Get hello name",
-                "operationId": "89ebbc2ffc5c579f49d4a74e4ff59251",
+                "operationId": "ac4018c1d1301d05ab7ab994ea575ae6",
                 "parameters": [
                     {
                         "name": "name",
@@ -48,7 +48,7 @@
                     "courses"
                 ],
                 "summary": "Get courses",
-                "operationId": "393d6402ec1894565fa20c7b6fe4a349",
+                "operationId": "6e1ebb53ff07f5fdf9edd91438a0ec06",
                 "responses": {
                     "200": {
                         "description": "ok",
@@ -76,6 +76,59 @@
                         }
                     }
                 }
+            },
+            "post": {
+                "tags": [
+                    "courses"
+                ],
+                "summary": "Create courses",
+                "operationId": "168060ad0097434d27afb2a0b58871ad",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Miss Ellen Bosco"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Aliquam atque\n                         veniam asperiores voluptatem in distinctio ea. Nam est et laborum veniam non.\n                          Voluptas animi consequatur sed adipisci. Et laudantium tempora ipsa consequatur sunt."
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "courseId": {
+                                            "type": "integer",
+                                            "example": "1"
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "Miss Ellen Bosco"
+                                        },
+                                        "description": {
+                                            "type": "string",
+                                            "example": "Aliquam atque\n                         veniam asperiores voluptatem in distinctio ea. Nam est et laborum veniam non.\n                          Voluptas animi consequatur sed adipisci. Et laudantium tempora ipsa consequatur sunt."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
             }
         },
         "/api/courses/{courseId}": {
@@ -84,7 +137,7 @@
                     "courses"
                 ],
                 "summary": "Get course",
-                "operationId": "e5a47e892249ec9084507960ddb0fef5",
+                "operationId": "ad1ad293a2549d52caa5b65cbcbdfeff",
                 "parameters": [
                     {
                         "name": "courseId",
@@ -111,6 +164,100 @@
                                         "description": {
                                             "type": "string",
                                             "example": "Aliquam atque\n                         veniam asperiores voluptatem in distinctio ea. Nam est et laborum veniam non.\n                          Voluptas animi consequatur sed adipisci. Et laudantium tempora ipsa consequatur sunt."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "courses"
+                ],
+                "summary": "Update courses",
+                "operationId": "376ada19e72f501f9ea57719a43b5103",
+                "parameters": [
+                    {
+                        "name": "courseId",
+                        "in": "path",
+                        "description": "Get course",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Miss Ellen Bosco"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Aliquam atqueveniam asperiores voluptatem in distinctio ea. Nam est et laborum veniam non.Voluptas animi consequatur sed adipisci. Et laudantium tempora ipsa consequatur sunt."
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "courseId": {
+                                            "type": "integer",
+                                            "example": "1"
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "Miss Ellen Bosco"
+                                        },
+                                        "description": {
+                                            "type": "string",
+                                            "example": "Aliquam atqueveniam asperiores voluptatem in distinctio ea. Nam est et laborum veniam non.Voluptas animi consequatur sed adipisci. Et laudantium tempora ipsa consequatur sunt."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "courses"
+                ],
+                "summary": "Delete course",
+                "operationId": "9742b020fee1602954f5968c687eef62",
+                "parameters": [
+                    {
+                        "name": "courseId",
+                        "in": "path",
+                        "description": "Delete course",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "удалено"
                                         }
                                     },
                                     "type": "object"

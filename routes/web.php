@@ -23,4 +23,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/user',[\App\Http\Controllers\UserController::class, 'do']);
+Route::get('/user',[\App\Http\Controllers\CoursesController::class, 'do']);

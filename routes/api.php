@@ -22,8 +22,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 
-Route::get('/courses',[\App\Http\Controllers\UserController::class, 'index']);
+Route::get('/courses',[\App\Http\Controllers\CoursesController::class, 'CoursesIndex']);
 
-Route::get('/courses/{courseId}',[\App\Http\Controllers\UserController::class, 'view']);
+Route::post('/courses',[\App\Http\Controllers\CoursesController::class, 'CreateCourse']);
 
-Route::get('/hello/{name}',[\App\Http\Controllers\UserController::class, 'show']);
+
+Route::get('/courses/{courseId}',[\App\Http\Controllers\CoursesController::class, 'CourseView']);
+
+Route::put('/courses/{courseId}',[\App\Http\Controllers\CoursesController::class, 'UpdateCourse']);
+
+Route::delete('/courses/{courseId}',[\App\Http\Controllers\CoursesController::class, 'DeleteCourse']);
+
+Route::get('/hello/{name}',[\App\Http\Controllers\CoursesController::class, 'show']);

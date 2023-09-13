@@ -20,8 +20,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::get('/user',[\App\Http\Controllers\UserController::class, 'do']);
 
-Route::get('/index',[\App\Http\Controllers\UserController::class, 'index']);
+
+Route::get('/courses',[\App\Http\Controllers\UserController::class, 'index']);
+
+Route::get('/courses/{courseId}',[\App\Http\Controllers\UserController::class, 'view']);
 
 Route::get('/hello/{name}',[\App\Http\Controllers\UserController::class, 'show']);

@@ -54,15 +54,86 @@ class UserController extends Controller
 
 
 
-public function do(){
-//phpinfo();
-    for ($i=0; $i<10; $i++){
-        $arr[]=$i;
-    }
-var_dump($arr);
+
+    #[OA\Get(
+        path:"/api/courses",
+        summary:"Get courses",
+        tags:["courses"],
+
+        responses: [
+            new OA\Response(
+                response: 200,
+                description: 'ok',
+                content:
+                new OA\JsonContent(
+
+                    example: [
+
+                            new OA\Property(property:"courseId", type:"integer", example:"1"),
+                            new OA\Property(property:"name", type:"string", example:"Miss Ellen Bosco"),
+                            new OA\Property(property:"description", type:"string", example:"Aliquam atqueveniam asperiores voluptatem in distinctio ea. Nam est et laborum veniam non.Voluptas animi consequatur sed adipisci. Et laudantium tempora ipsa consequatur sunt.")
 
 
+
+
+
+
+
+
+                  ]
+
+                )
+            )]
+
+
+    )]
+
+public function index(){
+       $courses=Course::all();
+        return response()->json($courses);
 }
+
+
+
+
+
+    #[OA\Get(
+        path:"/api/courses/{courseId}",
+        summary:"Get course",
+        tags:["courses"],
+        parameters:[
+            new OA\Parameter(
+                name:"courseId",
+                description:"Get course",
+                in:"path",
+                required:true,
+            )],
+        responses: [
+            new OA\Response(
+                response: 200,
+                description: 'ok',
+                content: new OA\JsonContent(
+                    properties: [
+                        new OA\Property(property:"courseId", type:"integer", example:"1"),
+                        new OA\Property(property:"name", type:"string", example:"Miss Ellen Bosco"),
+                        new OA\Property(property:"description", type:"string", example:"Aliquam atque
+                         veniam asperiores voluptatem in distinctio ea. Nam est et laborum veniam non.
+                          Voluptas animi consequatur sed adipisci. Et laudantium tempora ipsa consequatur sunt."),
+                    ]
+                ))]
+    )]
+    public function view($courseId){
+        $courses=Course::query()->findOrFail($courseId);
+        return response()->json($courses);
+    }
+
+
+
+
+
+
+
+
 }
 
 

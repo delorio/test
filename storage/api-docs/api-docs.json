@@ -41,6 +41,85 @@
                     }
                 }
             }
+        },
+        "/api/courses": {
+            "get": {
+                "tags": [
+                    "courses"
+                ],
+                "summary": "Get courses",
+                "operationId": "393d6402ec1894565fa20c7b6fe4a349",
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": [
+                                    {
+                                        "type": "integer",
+                                        "example": "1",
+                                        "property": "courseId"
+                                    },
+                                    {
+                                        "type": "string",
+                                        "example": "Miss Ellen Bosco",
+                                        "property": "name"
+                                    },
+                                    {
+                                        "type": "string",
+                                        "example": "Aliquam atqueveniam asperiores voluptatem in distinctio ea. Nam est et laborum veniam non.Voluptas animi consequatur sed adipisci. Et laudantium tempora ipsa consequatur sunt.",
+                                        "property": "description"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/courses/{courseId}": {
+            "get": {
+                "tags": [
+                    "courses"
+                ],
+                "summary": "Get course",
+                "operationId": "e5a47e892249ec9084507960ddb0fef5",
+                "parameters": [
+                    {
+                        "name": "courseId",
+                        "in": "path",
+                        "description": "Get course",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "courseId": {
+                                            "type": "integer",
+                                            "example": "1"
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "Miss Ellen Bosco"
+                                        },
+                                        "description": {
+                                            "type": "string",
+                                            "example": "Aliquam atque\n                         veniam asperiores voluptatem in distinctio ea. Nam est et laborum veniam non.\n                          Voluptas animi consequatur sed adipisci. Et laudantium tempora ipsa consequatur sunt."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

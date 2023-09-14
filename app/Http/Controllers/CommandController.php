@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
-use Illuminate\Http\Request;
 
 class CommandController extends Controller
 {
@@ -34,8 +33,6 @@ class CommandController extends Controller
 
 
 
-
-
     public function update($courseId ,$request){
         $course=Course::query()->findOrFail($courseId);
         $course->update([
@@ -49,7 +46,7 @@ class CommandController extends Controller
 
 
     public function delete($courseId){
-        $courses=Course::query()->findOrFail($courseId);
+        $courses=Course::query()->findOrFail($courseId)->delete();
         return response()->json(['massage'=>'удалено']);
     }
 

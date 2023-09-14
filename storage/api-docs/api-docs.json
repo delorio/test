@@ -267,6 +267,232 @@
                     }
                 }
             }
+        },
+        "/api/lessons": {
+            "get": {
+                "tags": [
+                    "lessons"
+                ],
+                "summary": "Get lessons",
+                "operationId": "aa93ae00e5becacff8d9f8df36f48149",
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {},
+                                "example": [
+                                    {
+                                        "type": "integer",
+                                        "example": "3",
+                                        "property": "lessonId"
+                                    },
+                                    {
+                                        "type": "string",
+                                        "example": "Zula Ferry",
+                                        "property": "name"
+                                    },
+                                    {
+                                        "type": "string",
+                                        "example": "Et qui aliquam deleniti non dolorem. Dolore incidunt magni eveniet eius in ut qui. Praesentium impedit ut velit magni nostrum.",
+                                        "property": "description"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "lessons"
+                ],
+                "summary": "Create lessons",
+                "operationId": "e396dbec3ca387fbcb969ab796a8cf28",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Zula Ferry"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Et qui aliquam deleniti non dolorem. Dolore incidunt magni eveniet eius in ut qui. Praesentium impedit ut velit magni nostrum."
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "lessonId": {
+                                            "type": "integer",
+                                            "example": "3"
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "Zula Ferry"
+                                        },
+                                        "description": {
+                                            "type": "string",
+                                            "example": "Et qui aliquam deleniti non dolorem. Dolore incidunt magni eveniet eius in ut qui. Praesentium impedit ut velit magni nostrum."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/lessons/{lessonId}": {
+            "get": {
+                "tags": [
+                    "lessons"
+                ],
+                "summary": "Get lesson",
+                "operationId": "f6622ec99975e1bb8a7d31e2f2d389b3",
+                "parameters": [
+                    {
+                        "name": "lessonId",
+                        "in": "path",
+                        "description": "Get lesson",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "lessonId": {
+                                            "type": "integer",
+                                            "example": "3"
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "Zula Ferry"
+                                        },
+                                        "description": {
+                                            "type": "string",
+                                            "example": "Et qui aliquam deleniti non dolorem. Dolore incidunt magni eveniet eius in ut qui. Praesentium impedit ut velit magni nostrum."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "lessons"
+                ],
+                "summary": "Update lesson",
+                "operationId": "af53ae04d6845fba8955a65fda2abd39",
+                "parameters": [
+                    {
+                        "name": "lessonId",
+                        "in": "path",
+                        "description": "Update lesson",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Zula Ferry"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Et qui aliquam deleniti non dolorem. Dolore incidunt magni eveniet eius in ut qui. Praesentium impedit ut velit magni nostrum."
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "lessonId": {
+                                            "type": "integer",
+                                            "example": "3"
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "Zula Ferry"
+                                        },
+                                        "description": {
+                                            "type": "string",
+                                            "example": "Et qui aliquam deleniti non dolorem. Dolore incidunt magni eveniet eius in ut qui. Praesentium impedit ut velit magni nostrum."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "lessons"
+                ],
+                "summary": "Delete lesson",
+                "operationId": "794a2c9a457cf203ac5453bdbded6d99",
+                "parameters": [
+                    {
+                        "name": "lessonId",
+                        "in": "path",
+                        "description": "Delete lesson",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "удалено"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 use App\Models\Course;
-use OpenApi\Attributes as OA;
-
 use Illuminate\Http\Request;
+use OpenApi\Attributes as OA;
 
 #[OA\Info(
     version: '1.0.0',

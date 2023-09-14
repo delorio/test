@@ -2,15 +2,15 @@
 
 namespace Database\Factories;
 
-use App\Models\Course;
+use App\Models\Lesson;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Lesson>
  */
-class CourseFactory extends Factory
+class LessonFactory extends Factory
 {
-//    protected $model=Course::class;
+   protected $model=Lesson::class;
     /**
      * Define the model's default state.
      *
@@ -19,7 +19,7 @@ class CourseFactory extends Factory
     public function definition(): array
     {
         return [
-            'name'=>fake()->text(),
+            'name'=>fake()->name(),
             'description'=>fake()->text(),
         ];
     }

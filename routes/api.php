@@ -34,3 +34,17 @@ Route::put('/courses/{courseId}',[\App\Http\Controllers\CoursesController::class
 Route::delete('/courses/{courseId}',[\App\Http\Controllers\CoursesController::class, 'DeleteCourse']);
 
 Route::get('/hello/{name}',[\App\Http\Controllers\CoursesController::class, 'show']);
+
+
+
+
+
+Route::get('/lessons',[\App\Http\Controllers\LessonCommandController::class, 'IndexLessons']);
+
+Route::post('/lessons',[\App\Http\Controllers\LessonCommandController::class, 'CreateLesson']);
+
+Route::get('/lessons/{lessonId}',[\App\Http\Controllers\LessonCommandController::class, 'ViewLesson']);
+
+Route::put('/lessons/{lessonId}',[\App\Http\Controllers\LessonCommandController::class, 'UpdateLesson']);
+
+Route::delete('/lessons/{lessonsId}',[\App\Http\Controllers\LessonCommandController::class, 'DeleteLesson']);

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Course;
+use App\Services\CoursesServices;
 use Illuminate\Http\Request;
 use OpenApi\Attributes as OA;
 
@@ -14,43 +15,14 @@ use OpenApi\Attributes as OA;
 #[OA\PathItem(
     path:"/api/"
 )]
-class CoursesController extends CommandController
+class CoursesController extends Controller
+//class CoursesController extends CommandController
 {
 
-
-
-    #[OA\Get(
-            path:"/api/hello/{name}",
-            summary:"Get hello name",
-            tags:["name"],
-            parameters:[
-                new OA\Parameter(
-                    name:"name",
-                    description:"Get hello name",
-                    in:"path",
-                    required:true,
-          )],
-        responses: [
-            new OA\Response(
-                response: 200,
-                description: 'ok',
-                content: new OA\JsonContent(
-                        properties: [new OA\Property(
-                        property:"message",
-                        type:"string",
-                        example:"hello Pavel")
-                ]
-            ))]
-
-
-)]
-    public function show($name){
-        return response()->json(['message'=>'hello '.$name]);
-
+    public function __construct(CoursesServices $courseService)
+    {
+        $this->courseService = $courseService;
     }
-
-
-
 
     #[OA\Get(
         path:"/api/courses",
@@ -69,20 +41,15 @@ class CoursesController extends CommandController
                             new OA\Property(property:"description", type:"string", example:"Aliquam atqueveniam asperiores voluptatem in distinctio ea. Nam est et laborum veniam non.Voluptas animi consequatur sed adipisci. Et laudantium tempora ipsa consequatur sunt.")
 
                   ]
-
                 )
             )]
 
 
     )]
-
 public function CoursesIndex(){
-        $courses= new Course();
-        return $this->index($courses) ;
+        $courses=  $this->courseService->index();
+        return response()->json($courses);
 }
-
-
-
 
 
     #[OA\Get(
@@ -113,13 +80,10 @@ public function CoursesIndex(){
 
 
     public function CourseView($courseId){
-        return $this->view($courseId);
+        $course= $this->courseService->view($courseId);
+        return response()->json($course);
+
     }
-
-
-
-
-
 
 
 
@@ -155,7 +119,8 @@ public function CoursesIndex(){
     )]
 
     public function CreateCourse(Request $request){
-        return $this->create($request);
+        $course=$this->courseService->create($request);
+        return response()->json($course) ;
     }
 
 
@@ -197,7 +162,8 @@ public function CoursesIndex(){
 
 
     public function UpdateCourse($courseId,Request $request){
-        return $this->update($courseId,$request);
+        $course= $this->courseService->update($courseId,$request);
+        return response()->json($course);
     }
 
 
@@ -226,10 +192,57 @@ public function CoursesIndex(){
 
 
     public function DeleteCourse($courseId){
-        return $this->delete($courseId);
+        $course= $this->courseService->delete($courseId);
+        return response()->json($course);
     }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//
+//
+//
+//    #[OA\Get(
+//        path:"/api/hello/{name}",
+//        summary:"Get hello name",
+//        tags:["name"],
+//        parameters:[
+//            new OA\Parameter(
+//                name:"name",
+//                description:"Get hello name",
+//                in:"path",
+//                required:true,
+//            )],
+//        responses: [
+//            new OA\Response(
+//                response: 200,
+//                description: 'ok',
+//                content: new OA\JsonContent(
+//                    properties: [new OA\Property(
+//                        property:"message",
+//                        type:"string",
+//                        example:"hello Pavel")
+//                    ]
+//                ))]
+//
+//
+//    )]
+//    public function show($name){
+//        return response()->json(['message'=>'hello '.$name]);
+//
+//    }
 
 }
 

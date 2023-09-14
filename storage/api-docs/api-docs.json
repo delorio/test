@@ -7,41 +7,6 @@
     },
     "paths": {
         "/api/": {},
-        "/api/hello/{name}": {
-            "get": {
-                "tags": [
-                    "name"
-                ],
-                "summary": "Get hello name",
-                "operationId": "ac4018c1d1301d05ab7ab994ea575ae6",
-                "parameters": [
-                    {
-                        "name": "name",
-                        "in": "path",
-                        "description": "Get hello name",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "ok",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "hello Pavel"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
         "/api/courses": {
             "get": {
                 "tags": [

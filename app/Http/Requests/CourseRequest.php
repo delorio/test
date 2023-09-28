@@ -22,8 +22,8 @@ class CourseRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=>'required',
-            'description'=>'required',
+            'name'=>'string|required',
+            'description'=>'string|required|max:255',
         ];
     }
 }

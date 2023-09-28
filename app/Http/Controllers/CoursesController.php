@@ -102,7 +102,7 @@ class CoursesController extends Controller
             )
         ]
     )]
-    public function CreateCourse(Request $request)
+    public function CreateCourse(CourseRequest $request)
     {
         $course = $this->courseService->create($request);
         return response()->json(['data'=>$course]);

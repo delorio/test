@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Requests\CourseRequest;
 use App\Models\Course;
 use App\Services\CoursesServices;
 use Illuminate\Http\Request;
@@ -11,9 +12,8 @@ use OpenApi\Attributes as OA;
     description: 'API endpoint',
     title: 'Api'
 )]
-
 #[OA\PathItem(
-    path:"/api/"
+    path: "/api/"
 )]
 class CoursesController extends Controller
 //class CoursesController extends CommandController
@@ -25,175 +25,159 @@ class CoursesController extends Controller
     }
 
     #[OA\Get(
-        path:"/api/courses",
-        summary:"Get courses",
-        tags:["courses"],
+        path: "/api/courses",
+        summary: "Get courses",
+        tags: ["courses"],
 
         responses: [
             new OA\Response(
                 response: 200,
                 description: 'ok',
-                content:
-                new OA\JsonContent(
-                    example: [
-                            new OA\Property(property:"courseId", type:"integer", example:"1"),
-                            new OA\Property(property:"name", type:"string", example:"Miss Ellen Bosco"),
-                            new OA\Property(property:"description", type:"string", example:"Aliquam atqueveniam asperiores voluptatem in distinctio ea. Nam est et laborum veniam non.Voluptas animi consequatur sed adipisci. Et laudantium tempora ipsa consequatur sunt.")
-
-                  ]
+                content: new OA\JsonContent(
+//
+                    ref: '#/components/schemas/CoursesResponse'
                 )
-            )]
+            )
+        ]
 
 
     )]
-public function CoursesIndex(){
-        $courses=  $this->courseService->index();
-        return response()->json($courses);
-}
+    public function CoursesIndex()
+    {
+        $courses = $this->courseService->index();
+        return response()->json(['data'=>$courses]);
+    }
 
 
     #[OA\Get(
-        path:"/api/courses/{courseId}",
-        summary:"Get course",
-        tags:["courses"],
-        parameters:[
+        path: "/api/courses/{courseId}",
+        summary: "Get course",
+        tags: ["courses"],
+        parameters: [
             new OA\Parameter(
-                name:"courseId",
-                description:"Get course",
-                in:"path",
-                required:true,
-            )],
+                name: "courseId",
+                description: "Get course",
+                in: "path",
+                required: true,
+            )
+        ],
         responses: [
             new OA\Response(
                 response: 200,
                 description: 'ok',
                 content: new OA\JsonContent(
-                    properties: [
-                        new OA\Property(property:"courseId", type:"integer", example:"1"),
-                        new OA\Property(property:"name", type:"string", example:"Miss Ellen Bosco"),
-                        new OA\Property(property:"description", type:"string", example:"Aliquam atque
-                         veniam asperiores voluptatem in distinctio ea. Nam est et laborum veniam non.
-                          Voluptas animi consequatur sed adipisci. Et laudantium tempora ipsa consequatur sunt."),
-                    ]
-                ))]
+
+                    ref: '#/components/schemas/CoursesResponse'
+                )
+            )
+        ]
     )]
-
-
-    public function CourseView($courseId){
-        $course= $this->courseService->view($courseId);
-        return response()->json($course);
-
+    public function CourseView($courseId)
+    {
+        $course = $this->courseService->view($courseId);
+        return response()->json(['data'=>$course]);
     }
-
 
 
     #[OA\Post(
-        path:"/api/courses",
-        summary:"Create courses",
+        path: "/api/courses",
+        summary: "Create courses",
         requestBody: new OA\RequestBody(
             required: true,
             content: new OA\JsonContent
             (
-                properties: [
-                    new OA\Property(property:"name", type:"string", example:"Miss Ellen Bosco"),
-                    new OA\Property(property:"description", type:"string", example:"Aliquam atque
-                         veniam asperiores voluptatem in distinctio ea. Nam est et laborum veniam non.
-                          Voluptas animi consequatur sed adipisci. Et laudantium tempora ipsa consequatur sunt."),
-                ]
+//
+                ref: '#/components/schemas/CoursesRequestsBodies'
             )
         ),
-        tags:["courses"],
+        tags: ["courses"],
         responses: [
             new OA\Response(
                 response: 200,
                 description: 'ok',
                 content: new OA\JsonContent(
-                    properties: [
-                        new OA\Property(property:"courseId", type:"integer", example:"1"),
-                        new OA\Property(property:"name", type:"string", example:"Miss Ellen Bosco"),
-                        new OA\Property(property:"description", type:"string", example:"Aliquam atque
-                         veniam asperiores voluptatem in distinctio ea. Nam est et laborum veniam non.
-                          Voluptas animi consequatur sed adipisci. Et laudantium tempora ipsa consequatur sunt."),
-                    ]
-                ))]
+//
+                ref: '#/components/schemas/CoursesResponse'
+                )
+            )
+        ]
     )]
-
-    public function CreateCourse(Request $request){
-        $course=$this->courseService->create($request);
-        return response()->json($course) ;
+    public function CreateCourse(Request $request)
+    {
+        $course = $this->courseService->create($request);
+        return response()->json(['data'=>$course]);
     }
 
 
-
-
     #[OA\Put(
-        path:"/api/courses/{courseId}",
-        summary:"Update courses",
+        path: "/api/courses/{courseId}",
+        summary: "Update courses",
         requestBody: new OA\RequestBody(
             required: true,
             content: new OA\JsonContent
             (
-                properties: [
-                    new OA\Property(property:"name", type:"string", example:"Miss Ellen Bosco"),
-                    new OA\Property(property:"description", type:"string", example:"Aliquam atqueveniam asperiores voluptatem in distinctio ea. Nam est et laborum veniam non.Voluptas animi consequatur sed adipisci. Et laudantium tempora ipsa consequatur sunt."),
-                ]
+                ref: '#/components/schemas/CoursesRequestsBodies'
             )
         ),
-        tags:["courses"],
-        parameters:[
+        tags: ["courses"],
+        parameters: [
             new OA\Parameter(
-                name:"courseId",
-                description:"Get course",
-                in:"path",
-                required:true,
-            )],
+                name: "courseId",
+                description: "Get course",
+                in: "path",
+                required: true,
+            )
+        ],
         responses: [
             new OA\Response(
                 response: 200,
                 description: 'ok',
                 content: new OA\JsonContent(
-                    properties: [
-                        new OA\Property(property:"courseId", type:"integer", example:"1"),
-                        new OA\Property(property:"name", type:"string", example:"Miss Ellen Bosco"),
-                        new OA\Property(property:"description", type:"string", example:"Aliquam atqueveniam asperiores voluptatem in distinctio ea. Nam est et laborum veniam non.Voluptas animi consequatur sed adipisci. Et laudantium tempora ipsa consequatur sunt."),
-                    ]
-                ))]
+
+                    ref: '#/components/schemas/CoursesResponse'
+                )
+            )
+        ]
     )]
 
 
-    public function UpdateCourse($courseId,Request $request){
-        $course= $this->courseService->update($courseId,$request);
-        return response()->json($course);
+    public function UpdateCourse($courseId, CourseRequest $request)
+    {
+        $course = $this->courseService->update($courseId, $request);
+        return response()->json(['data'=>$course]);
     }
 
 
     #[OA\Delete(
-        path:"/api/courses/{courseId}",
-        summary:"Delete course",
-        tags:["courses"],
-        parameters:[
+        path: "/api/courses/{courseId}",
+        summary: "Delete course",
+        tags: ["courses"],
+        parameters: [
             new OA\Parameter(
-                name:"courseId",
-                description:"Delete course",
-                in:"path",
-                required:true,
-            )],
+                name: "courseId",
+                description: "Delete course",
+                in: "path",
+                required: true,
+            )
+        ],
         responses: [
             new OA\Response(
                 response: 200,
                 description: 'ok',
                 content: new OA\JsonContent(
-                    properties: [
-                        new OA\Property(property:"message", type:"string", example:"удалено"),
-
-                    ]
-                ))]
+//                    properties: [
+//                        new OA\Property(property: "message", type: "string", example: "удалено"),
+//
+//                    ]
+                    ref: '#/components/schemas/DeleteCoursesResponse'
+                )
+            )
+        ]
     )]
-
-
-    public function DeleteCourse($courseId){
-        $course= $this->courseService->delete($courseId);
-        return response()->json($course);
+    public function DeleteCourse($courseId)
+    {
+        $course = $this->courseService->delete($courseId);
+        return response()->json(['data'=>$course]);
     }
 
 

@@ -19,24 +19,9 @@
                         "description": "ok",
                         "content": {
                             "application/json": {
-                                "schema": {},
-                                "example": [
-                                    {
-                                        "type": "integer",
-                                        "example": "1",
-                                        "property": "courseId"
-                                    },
-                                    {
-                                        "type": "string",
-                                        "example": "Miss Ellen Bosco",
-                                        "property": "name"
-                                    },
-                                    {
-                                        "type": "string",
-                                        "example": "Aliquam atqueveniam asperiores voluptatem in distinctio ea. Nam est et laborum veniam non.Voluptas animi consequatur sed adipisci. Et laudantium tempora ipsa consequatur sunt.",
-                                        "property": "description"
-                                    }
-                                ]
+                                "schema": {
+                                    "$ref": "#/components/schemas/CoursesResponse"
+                                }
                             }
                         }
                     }
@@ -53,17 +38,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "properties": {
-                                    "name": {
-                                        "type": "string",
-                                        "example": "Miss Ellen Bosco"
-                                    },
-                                    "description": {
-                                        "type": "string",
-                                        "example": "Aliquam atque\n                         veniam asperiores voluptatem in distinctio ea. Nam est et laborum veniam non.\n                          Voluptas animi consequatur sed adipisci. Et laudantium tempora ipsa consequatur sunt."
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/components/schemas/CoursesRequestsBodies"
                             }
                         }
                     }
@@ -74,21 +49,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "properties": {
-                                        "courseId": {
-                                            "type": "integer",
-                                            "example": "1"
-                                        },
-                                        "name": {
-                                            "type": "string",
-                                            "example": "Miss Ellen Bosco"
-                                        },
-                                        "description": {
-                                            "type": "string",
-                                            "example": "Aliquam atque\n                         veniam asperiores voluptatem in distinctio ea. Nam est et laborum veniam non.\n                          Voluptas animi consequatur sed adipisci. Et laudantium tempora ipsa consequatur sunt."
-                                        }
-                                    },
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/CoursesResponse"
                                 }
                             }
                         }
@@ -117,21 +78,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "properties": {
-                                        "courseId": {
-                                            "type": "integer",
-                                            "example": "1"
-                                        },
-                                        "name": {
-                                            "type": "string",
-                                            "example": "Miss Ellen Bosco"
-                                        },
-                                        "description": {
-                                            "type": "string",
-                                            "example": "Aliquam atque\n                         veniam asperiores voluptatem in distinctio ea. Nam est et laborum veniam non.\n                          Voluptas animi consequatur sed adipisci. Et laudantium tempora ipsa consequatur sunt."
-                                        }
-                                    },
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/CoursesResponse"
                                 }
                             }
                         }
@@ -157,17 +104,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "properties": {
-                                    "name": {
-                                        "type": "string",
-                                        "example": "Miss Ellen Bosco"
-                                    },
-                                    "description": {
-                                        "type": "string",
-                                        "example": "Aliquam atqueveniam asperiores voluptatem in distinctio ea. Nam est et laborum veniam non.Voluptas animi consequatur sed adipisci. Et laudantium tempora ipsa consequatur sunt."
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/components/schemas/CoursesRequestsBodies"
                             }
                         }
                     }
@@ -178,21 +115,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "properties": {
-                                        "courseId": {
-                                            "type": "integer",
-                                            "example": "1"
-                                        },
-                                        "name": {
-                                            "type": "string",
-                                            "example": "Miss Ellen Bosco"
-                                        },
-                                        "description": {
-                                            "type": "string",
-                                            "example": "Aliquam atqueveniam asperiores voluptatem in distinctio ea. Nam est et laborum veniam non.Voluptas animi consequatur sed adipisci. Et laudantium tempora ipsa consequatur sunt."
-                                        }
-                                    },
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/CoursesResponse"
                                 }
                             }
                         }
@@ -219,13 +142,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "удалено"
-                                        }
-                                    },
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/DeleteCoursesResponse"
                                 }
                             }
                         }
@@ -454,6 +371,93 @@
                                     "type": "object"
                                 }
                             }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "CoursesRequestsBodies": {
+                "required": [
+                    "name",
+                    "description"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "PHP"
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "PHP Courses"
+                    }
+                },
+                "type": "object"
+            },
+            "CoursesResponse": {
+                "required": [
+                    "data"
+                ],
+                "properties": {
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/CourseSchemas"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "DeleteCoursesResponse": {
+                "required": [
+                    "data"
+                ],
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "example": {
+                            "message": "удалено"
+                        }
+                    }
+                },
+                "type": "object"
+            },
+            "CourseSchemas": {
+                "required": [
+                    "courseId",
+                    "name",
+                    "description"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "maxLength": 16,
+                        "example": "abc"
+                    },
+                    "courseId": {
+                        "type": "integer",
+                        "maxLength": 64,
+                        "example": 2
+                    },
+                    "description": {
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "HELLO"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "requestBodies": {
+            "CourseRequestBody": {
+                "description": "Course request body",
+                "required": true,
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/CoursesRequestsBodies"
                         }
                     }
                 }

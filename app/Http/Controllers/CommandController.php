@@ -10,7 +10,7 @@ class CommandController extends Controller
 
 
     protected function index($request){
-        return response()->json($request::all());
+        return response()->json( [$request::all()]);
     }
 
 

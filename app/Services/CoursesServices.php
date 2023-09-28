@@ -29,11 +29,12 @@ class CoursesServices
 
     public function update($courseId ,$request){
         $course=Course::query()->findOrFail($courseId);
+
         $course->update([
             'name'=>$request->input('name'),
             'description'=>$request->input('description'),
         ]);
-        return $request;
+        return $course;
     }
 
 

@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Http\DTO\CourseDTO\CourseDTO;
 use App\Http\Requests\CourseRequest;
 use App\Models\Course;
 use App\Services\CoursesServices;
@@ -45,7 +47,7 @@ class CoursesController extends Controller
     public function CoursesIndex()
     {
         $courses = $this->courseService->index();
-        return response()->json(['data'=>$courses]);
+        return response()->json(['data' => $courses]);
     }
 
 
@@ -75,7 +77,7 @@ class CoursesController extends Controller
     public function CourseView($courseId)
     {
         $course = $this->courseService->view($courseId);
-        return response()->json(['data'=>$course]);
+        return response()->json(['data' => $course]);
     }
 
 
@@ -97,15 +99,18 @@ class CoursesController extends Controller
                 description: 'ok',
                 content: new OA\JsonContent(
 //
-                ref: '#/components/schemas/CoursesResponse'
+                    ref: '#/components/schemas/CoursesResponse'
                 )
             )
         ]
     )]
     public function CreateCourse(CourseRequest $request)
     {
-        $course = $this->courseService->create($request);
+        $courseDTO = new CourseDTO();
+        $courseDTO->buildFromArray($request->validated());
+        $course = $this->courseService->create($courseDTO);
         return response()->json(['data'=>$course]);
+
     }
 
 
@@ -139,12 +144,12 @@ class CoursesController extends Controller
             )
         ]
     )]
-
-
     public function UpdateCourse($courseId, CourseRequest $request)
     {
-        $course = $this->courseService->update($courseId, $request);
-        return response()->json(['data'=>$course]);
+        $courseDTO = new CourseDTO();
+        $courseDTO->buildFromArray($request->validated());
+        $course = $this->courseService->update($courseId, $courseDTO);
+        return response()->json(['data' => $course]);
     }
 
 
@@ -177,56 +182,9 @@ class CoursesController extends Controller
     public function DeleteCourse($courseId)
     {
         $course = $this->courseService->delete($courseId);
-        return response()->json(['data'=>$course]);
+        return response()->json(['data' => $course]);
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//
-//
-//
-//    #[OA\Get(
-//        path:"/api/hello/{name}",
-//        summary:"Get hello name",
-//        tags:["name"],
-//        parameters:[
-//            new OA\Parameter(
-//                name:"name",
-//                description:"Get hello name",
-//                in:"path",
-//                required:true,
-//            )],
-//        responses: [
-//            new OA\Response(
-//                response: 200,
-//                description: 'ok',
-//                content: new OA\JsonContent(
-//                    properties: [new OA\Property(
-//                        property:"message",
-//                        type:"string",
-//                        example:"hello Pavel")
-//                    ]
-//                ))]
-//
-//
-//    )]
-//    public function show($name){
-//        return response()->json(['message'=>'hello '.$name]);
-//
-//    }
 
 }
 

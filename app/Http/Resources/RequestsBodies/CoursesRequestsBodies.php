@@ -18,7 +18,7 @@ use OpenApi\Attributes as OA;
 )]
 
 #[OA\Schema(
-    required: ['name','description']
+    required: ['courseId','name','description']
 )]
 class CoursesRequestsBodies
 {
@@ -41,12 +41,4 @@ class CoursesRequestsBodies
 
 }
 
-// <?php namespace App\Http\Api\V1\Requests;
-//
-//class InvoiceStateCreateRequest extends BaseRequest
-//{
-//    public function rules(): array
-//    {
-//        return ['name' => 'string|required|unique:invoice_states|max:255',];
-//    }
-//}
+

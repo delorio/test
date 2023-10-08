@@ -31,7 +31,7 @@ class CoursesServices
     }
 
 
-    public function update(int $courseId, CourseDTO $courseDTO)
+    public function update( int $courseId, CourseDTO $courseDTO)
     {
         $course = Course::query()->findOrFail($courseId);
 
@@ -48,4 +48,5 @@ class CoursesServices
         $courses = Course::query()->findOrFail($courseId)->delete();
         return ['massage' => 'удалено'];
     }
+
 }

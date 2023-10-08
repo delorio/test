@@ -381,6 +381,7 @@
         "schemas": {
             "CoursesRequestsBodies": {
                 "required": [
+                    "courseId",
                     "name",
                     "description"
                 ],

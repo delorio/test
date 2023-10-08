@@ -6,6 +6,8 @@ use App\Http\DTO\CourseDTO\CourseDTO;
 use App\Http\Requests\CourseRequest;
 use App\Models\Course;
 use App\Services\CoursesServices;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use OpenApi\Attributes as OA;
 
@@ -18,12 +20,11 @@ use OpenApi\Attributes as OA;
     path: "/api/"
 )]
 class CoursesController extends Controller
-//class CoursesController extends CommandController
 {
 
-    public function __construct(CoursesServices $courseService)
+    public function __construct(private readonly CoursesServices $courseService)
     {
-        $this->courseService = $courseService;
+
     }
 
     #[OA\Get(
@@ -36,20 +37,17 @@ class CoursesController extends Controller
                 response: 200,
                 description: 'ok',
                 content: new OA\JsonContent(
-//
                     ref: '#/components/schemas/CoursesResponse'
                 )
             )
         ]
 
-
     )]
-    public function CoursesIndex()
+    public function indexCourses(): JsonResponse
     {
         $courses = $this->courseService->index();
         return response()->json(['data' => $courses]);
     }
-
 
     #[OA\Get(
         path: "/api/courses/{courseId}",
@@ -74,7 +72,7 @@ class CoursesController extends Controller
             )
         ]
     )]
-    public function CourseView($courseId)
+    public function ViewCourse(int $courseId): JsonResponse
     {
         $course = $this->courseService->view($courseId);
         return response()->json(['data' => $course]);
@@ -104,13 +102,12 @@ class CoursesController extends Controller
             )
         ]
     )]
-    public function CreateCourse(CourseRequest $request)
+    public function createCourse(CourseRequest $request): JsonResponse
     {
         $courseDTO = new CourseDTO();
         $courseDTO->buildFromArray($request->validated());
         $course = $this->courseService->create($courseDTO);
-        return response()->json(['data'=>$course]);
-
+        return response()->json(['data' => $course]);
     }
 
 
@@ -144,8 +141,7 @@ class CoursesController extends Controller
             )
         ]
     )]
-
-    public function UpdateCourse( int $courseId, CourseRequest $request)
+    public function updateCourse(int $courseId, CourseRequest $request): JsonResponse
     {
         $courseDTO = new CourseDTO();
         $courseDTO->buildFromArray($request->validated());
@@ -176,7 +172,7 @@ class CoursesController extends Controller
             )
         ]
     )]
-    public function DeleteCourse($courseId)
+    public function deleteCourse(int $courseId): JsonResponse
     {
         $course = $this->courseService->delete($courseId);
         return response()->json(['data' => $course]);

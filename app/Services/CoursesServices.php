@@ -4,24 +4,26 @@ namespace App\Services;
 
 use App\Http\DTO\CourseDTO\CourseDTO;
 use App\Models\Course;
+use Illuminate\Database\Eloquent\Collection;
+
 
 class CoursesServices
 {
 
 
-    public function index()
+    public function index(): Collection
     {
         $courses = Course::all();
         return $courses;
     }
 
-    public function view($courseId)
+    public function view($courseId): Course
     {
         $courses = Course::query()->findOrFail($courseId);
         return $courses;
     }
 
-    public function create(CourseDTO $courseDTO)
+    public function create(CourseDTO $courseDTO): Course
     {
         $course = Course::query()->create([
             'name' => $courseDTO->name,
@@ -31,7 +33,7 @@ class CoursesServices
     }
 
 
-    public function update( int $courseId, CourseDTO $courseDTO)
+    public function update(int $courseId, CourseDTO $courseDTO): Course
     {
         $course = Course::query()->findOrFail($courseId);
 
@@ -43,7 +45,7 @@ class CoursesServices
     }
 
 
-    public function delete($courseId)
+    public function delete($courseId): array
     {
         $courses = Course::query()->findOrFail($courseId)->delete();
         return ['massage' => 'удалено'];

@@ -13,7 +13,7 @@
                     "courses"
                 ],
                 "summary": "Get courses",
-                "operationId": "6e1ebb53ff07f5fdf9edd91438a0ec06",
+                "operationId": "756886c35302e74016f01df7b0d278f9",
                 "responses": {
                     "200": {
                         "description": "ok",
@@ -32,7 +32,7 @@
                     "courses"
                 ],
                 "summary": "Create courses",
-                "operationId": "168060ad0097434d27afb2a0b58871ad",
+                "operationId": "89bb5bfec124111f6941f28dc6e572d2",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -63,7 +63,7 @@
                     "courses"
                 ],
                 "summary": "Get course",
-                "operationId": "ad1ad293a2549d52caa5b65cbcbdfeff",
+                "operationId": "c0e375ca51d55041071d63fae9efabac",
                 "parameters": [
                     {
                         "name": "courseId",
@@ -90,7 +90,7 @@
                     "courses"
                 ],
                 "summary": "Update courses",
-                "operationId": "376ada19e72f501f9ea57719a43b5103",
+                "operationId": "3431f4bb0eb13b87fa6e3ea418b9ca1e",
                 "parameters": [
                     {
                         "name": "courseId",
@@ -127,7 +127,7 @@
                     "courses"
                 ],
                 "summary": "Delete course",
-                "operationId": "9742b020fee1602954f5968c687eef62",
+                "operationId": "8c1c11820bbd60180c2fe863a3e78abc",
                 "parameters": [
                     {
                         "name": "courseId",
@@ -156,30 +156,15 @@
                     "lessons"
                 ],
                 "summary": "Get lessons",
-                "operationId": "aa93ae00e5becacff8d9f8df36f48149",
+                "operationId": "37ad1a20743c4dc6ee7d51e4f12262e1",
                 "responses": {
                     "200": {
                         "description": "ok",
                         "content": {
                             "application/json": {
-                                "schema": {},
-                                "example": [
-                                    {
-                                        "type": "integer",
-                                        "example": "3",
-                                        "property": "lessonId"
-                                    },
-                                    {
-                                        "type": "string",
-                                        "example": "Zula Ferry",
-                                        "property": "name"
-                                    },
-                                    {
-                                        "type": "string",
-                                        "example": "Et qui aliquam deleniti non dolorem. Dolore incidunt magni eveniet eius in ut qui. Praesentium impedit ut velit magni nostrum.",
-                                        "property": "description"
-                                    }
-                                ]
+                                "schema": {
+                                    "$ref": "#/components/schemas/LessonResponse"
+                                }
                             }
                         }
                     }
@@ -190,23 +175,13 @@
                     "lessons"
                 ],
                 "summary": "Create lessons",
-                "operationId": "e396dbec3ca387fbcb969ab796a8cf28",
+                "operationId": "ef3dd7b87a1f832348de070f940094e9",
                 "requestBody": {
                     "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
-                                "properties": {
-                                    "name": {
-                                        "type": "string",
-                                        "example": "Zula Ferry"
-                                    },
-                                    "description": {
-                                        "type": "string",
-                                        "example": "Et qui aliquam deleniti non dolorem. Dolore incidunt magni eveniet eius in ut qui. Praesentium impedit ut velit magni nostrum."
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/components/schemas/LessonsRequestsBodies"
                             }
                         }
                     }
@@ -217,21 +192,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "properties": {
-                                        "lessonId": {
-                                            "type": "integer",
-                                            "example": "3"
-                                        },
-                                        "name": {
-                                            "type": "string",
-                                            "example": "Zula Ferry"
-                                        },
-                                        "description": {
-                                            "type": "string",
-                                            "example": "Et qui aliquam deleniti non dolorem. Dolore incidunt magni eveniet eius in ut qui. Praesentium impedit ut velit magni nostrum."
-                                        }
-                                    },
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/LessonResponse"
                                 }
                             }
                         }
@@ -245,7 +206,7 @@
                     "lessons"
                 ],
                 "summary": "Get lesson",
-                "operationId": "f6622ec99975e1bb8a7d31e2f2d389b3",
+                "operationId": "f380a65612c458f7e256301bed382f2f",
                 "parameters": [
                     {
                         "name": "lessonId",
@@ -260,21 +221,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "properties": {
-                                        "lessonId": {
-                                            "type": "integer",
-                                            "example": "3"
-                                        },
-                                        "name": {
-                                            "type": "string",
-                                            "example": "Zula Ferry"
-                                        },
-                                        "description": {
-                                            "type": "string",
-                                            "example": "Et qui aliquam deleniti non dolorem. Dolore incidunt magni eveniet eius in ut qui. Praesentium impedit ut velit magni nostrum."
-                                        }
-                                    },
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/LessonResponse"
                                 }
                             }
                         }
@@ -286,7 +233,7 @@
                     "lessons"
                 ],
                 "summary": "Update lesson",
-                "operationId": "af53ae04d6845fba8955a65fda2abd39",
+                "operationId": "09c9d1891344f90f12efd401d4ad5e3f",
                 "parameters": [
                     {
                         "name": "lessonId",
@@ -300,17 +247,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "properties": {
-                                    "name": {
-                                        "type": "string",
-                                        "example": "Zula Ferry"
-                                    },
-                                    "description": {
-                                        "type": "string",
-                                        "example": "Et qui aliquam deleniti non dolorem. Dolore incidunt magni eveniet eius in ut qui. Praesentium impedit ut velit magni nostrum."
-                                    }
-                                },
-                                "type": "object"
+                                "$ref": "#/components/schemas/LessonsRequestsBodies"
                             }
                         }
                     }
@@ -321,21 +258,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "properties": {
-                                        "lessonId": {
-                                            "type": "integer",
-                                            "example": "3"
-                                        },
-                                        "name": {
-                                            "type": "string",
-                                            "example": "Zula Ferry"
-                                        },
-                                        "description": {
-                                            "type": "string",
-                                            "example": "Et qui aliquam deleniti non dolorem. Dolore incidunt magni eveniet eius in ut qui. Praesentium impedit ut velit magni nostrum."
-                                        }
-                                    },
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/LessonResponse"
                                 }
                             }
                         }
@@ -347,7 +270,7 @@
                     "lessons"
                 ],
                 "summary": "Delete lesson",
-                "operationId": "794a2c9a457cf203ac5453bdbded6d99",
+                "operationId": "ae5fd0ba7c7b9986f77566e59461b49f",
                 "parameters": [
                     {
                         "name": "lessonId",
@@ -362,13 +285,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "удалено"
-                                        }
-                                    },
-                                    "type": "object"
+                                    "$ref": "#/components/schemas/DeleteCoursesResponse"
                                 }
                             }
                         }
@@ -393,6 +310,29 @@
                     "description": {
                         "type": "string",
                         "example": "PHP Courses"
+                    }
+                },
+                "type": "object"
+            },
+            "LessonsRequestsBodies": {
+                "required": [
+                    "course_id",
+                    "name",
+                    "description",
+                    "lessonId"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "PHP"
+                    },
+                    "description": {
+                        "type": "string",
+                        "example": "PHP Courses"
+                    },
+                    "course_id": {
+                        "type": "integer",
+                        "example": 1
                     }
                 },
                 "type": "object"
@@ -425,6 +365,20 @@
                 },
                 "type": "object"
             },
+            "LessonResponse": {
+                "required": [
+                    "data"
+                ],
+                "properties": {
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/LessonSchemas"
+                        }
+                    }
+                },
+                "type": "object"
+            },
             "CourseSchemas": {
                 "required": [
                     "courseId",
@@ -449,6 +403,37 @@
                     }
                 },
                 "type": "object"
+            },
+            "LessonSchemas": {
+                "required": [
+                    "course_id",
+                    "name",
+                    "description",
+                    "lessonId"
+                ],
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "maxLength": 16,
+                        "example": "abc"
+                    },
+                    "lesson_id": {
+                        "type": "integer",
+                        "maxLength": 64,
+                        "example": 2
+                    },
+                    "description": {
+                        "type": "string",
+                        "maxLength": 255,
+                        "example": "HELLO"
+                    },
+                    "course_id": {
+                        "type": "integer",
+                        "maxLength": 64,
+                        "example": 4
+                    }
+                },
+                "type": "object"
             }
         },
         "requestBodies": {
@@ -459,6 +444,17 @@
                     "application/json": {
                         "schema": {
                             "$ref": "#/components/schemas/CoursesRequestsBodies"
+                        }
+                    }
+                }
+            },
+            "LessonsRequestsBodies": {
+                "description": "Lesson request body",
+                "required": true,
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/LessonsRequestsBodies"
                         }
                     }
                 }

@@ -17,7 +17,10 @@ class Lesson extends Model
         'lesson_id',
         'name',
         'description',
-
+        'course_id'
     ];
-
+    public function course()
+    {
+        return $this->hasMany(Course::class, 'course_id', 'course_id');
+    }
 }

@@ -40,11 +40,11 @@ class CourseTest extends TestCase
 
     public function testViewCourse(): void
     {
-
+//
         $courses = Course::factory()->create();
         $response = $this->get("/api/courses/{$courses->course_id}");
         $response->assertStatus(200)->assertJsonCount(1);
-
+//
     }
 
 
@@ -56,7 +56,8 @@ class CourseTest extends TestCase
         $this->assertDatabaseMissing('courses', ['course_id' => $course->course_id]);
     }
 
-    public function testCourseUpdate(): void
+
+    public function testUpdateCourse(): void
     {
         $this->withoutExceptionHandling();
         $courses = CourseFactory::new()->create();
@@ -64,7 +65,6 @@ class CourseTest extends TestCase
             'name' => 'php',
             'description' => 'php database'
         ];
-
 
         $response = $this->put("/api/courses/{$courses['course_id']}", $data);
         $this->assertDatabaseCount('courses', 1);

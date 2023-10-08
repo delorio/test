@@ -26,5 +26,4 @@ class CourseFactory extends Factory
 
     }
 
-
 }

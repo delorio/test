@@ -21,6 +21,10 @@ class Course extends Model
 
 
 
+    public function lesson()
+    {
+        return $this->belongsTo(Lesson::class, 'course_id', 'course_id');
+    }
 
 
 

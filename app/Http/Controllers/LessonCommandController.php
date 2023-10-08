@@ -2,199 +2,164 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Lesson;
-use Illuminate\Http\Request;
+use App\Http\DTO\LessonDTO\LessonDTO;
+use App\Http\Requests\LessonRequst;
+use App\Services\LessonServices;
+use Illuminate\Http\JsonResponse;
 use OpenApi\Attributes as OA;
 
 class LessonCommandController extends Controller
 {
 
 
-
-
-
-
-
-    #[OA\Get(
-        path:"/api/lessons",
-        summary:"Get lessons",
-        tags:["lessons"],
-
-        responses: [
-            new OA\Response(
-                response: 200,
-                description: 'ok',
-                content:
-                new OA\JsonContent(
-                    example: [
-                        new OA\Property(property:"lessonId", type:"integer", example:"3"),
-                        new OA\Property(property:"name", type:"string", example:"Zula Ferry"),
-                        new OA\Property(property:"description", type:"string", example:"Et qui aliquam deleniti non dolorem. Dolore incidunt magni eveniet eius in ut qui. Praesentium impedit ut velit magni nostrum.")
-
-                    ]
-
-                )
-            )]
-
-
-    )]
-
-    public function IndexLessons(){
-        $lessons= Lesson::all();
-        return response()->json($lessons);
+    public function __construct(private readonly LessonServices $lessonService)
+    {
     }
 
-
-
-
-
-
     #[OA\Get(
-        path:"/api/lessons/{lessonId}",
-        summary:"Get lesson",
-        tags:["lessons"],
-        parameters:[
-            new OA\Parameter(
-                name:"lessonId",
-                description:"Get lesson",
-                in:"path",
-                required:true,
-            )],
+        path: "/api/lessons",
+        summary: "Get lessons",
+        tags: ["lessons"],
+
         responses: [
             new OA\Response(
                 response: 200,
                 description: 'ok',
                 content: new OA\JsonContent(
-                    properties: [
-                        new OA\Property(property:"lessonId", type:"integer", example:"3"),
-                        new OA\Property(property:"name", type:"string", example:"Zula Ferry"),
-                        new OA\Property(property:"description", type:"string", example:"Et qui aliquam deleniti non dolorem. Dolore incidunt magni eveniet eius in ut qui. Praesentium impedit ut velit magni nostrum.")
-
-                    ]
-                ))]
+                    ref: '#/components/schemas/LessonResponse'
+                )
+            )
+        ]
     )]
-
-
-    public function ViewLesson($lessonsId){
-        $lessons=Lesson::query()->findOrFail($lessonsId);
-        return response()->json($lessons);
+    public function indexLessons(): JsonResponse
+    {
+        $lessons = $this->lessonService->index();
+        return response()->json(['data' => $lessons]);
     }
 
+    #[OA\Get(
+        path: "/api/lessons/{lessonId}",
+        summary: "Get lesson",
+        tags: ["lessons"],
+        parameters: [
+            new OA\Parameter(
+                name: "lessonId",
+                description: "Get lesson",
+                in: "path",
+                required: true,
+            )
+        ],
+        responses: [
+            new OA\Response(
+                response: 200,
+                description: 'ok',
+                content: new OA\JsonContent(
 
-
-
+                    ref: '#/components/schemas/LessonResponse'
+                )
+            )
+        ]
+    )]
+    public function viewLesson(int $lessonsId): JsonResponse
+    {
+        $lesson = $this->lessonService->view($lessonsId);
+        return response()->json(['data' => $lesson]);
+    }
 
     #[OA\Post(
-        path:"/api/lessons",
-        summary:"Create lessons",
+        path: "/api/lessons",
+        summary: "Create lessons",
         requestBody: new OA\RequestBody(
             required: true,
             content: new OA\JsonContent
             (
-                properties: [
-                    new OA\Property(property:"name", type:"string", example:"Zula Ferry"),
-                    new OA\Property(property:"description", type:"string", example:"Et qui aliquam deleniti non dolorem. Dolore incidunt magni eveniet eius in ut qui. Praesentium impedit ut velit magni nostrum.")
-
-                ]
+                ref: '#/components/schemas/LessonsRequestsBodies'
             )
         ),
-        tags:["lessons"],
+        tags: ["lessons"],
         responses: [
             new OA\Response(
                 response: 200,
                 description: 'ok',
                 content: new OA\JsonContent(
-                    properties: [
-                        new OA\Property(property:"lessonId", type:"integer", example:"3"),
-                        new OA\Property(property:"name", type:"string", example:"Zula Ferry"),
-                        new OA\Property(property:"description", type:"string", example:"Et qui aliquam deleniti non dolorem. Dolore incidunt magni eveniet eius in ut qui. Praesentium impedit ut velit magni nostrum.")
 
-                    ]
-                ))]
+                    ref: '#/components/schemas/LessonResponse'
+                )
+            )
+        ]
     )]
-
-    public function CreateLesson(Request $request){
-        $lessons=Lesson::query()->create([
-            'name'=>$request->input('name'),
-            'description'=>$request->input('description'),
-        ]);
-        return response()->json($lessons);
+    public function createLesson(LessonRequst $request): JsonResponse
+    {
+        $lessonDTO = new LessonDTO();
+        $lessonDTO->buildFromArray($request->validated());
+        $lesson = $this->lessonService->create($lessonDTO);
+        return response()->json(['data' => $lesson]);
     }
-
 
     #[OA\Put(
-        path:"/api/lessons/{lessonId}",
-        summary:"Update lesson",
+        path: "/api/lessons/{lessonId}",
+        summary: "Update lesson",
         requestBody: new OA\RequestBody(
             required: true,
             content: new OA\JsonContent
             (
-                properties: [
-                    new OA\Property(property:"name", type:"string", example:"Zula Ferry"),
-                    new OA\Property(property:"description", type:"string", example:"Et qui aliquam deleniti non dolorem. Dolore incidunt magni eveniet eius in ut qui. Praesentium impedit ut velit magni nostrum.")
-                ]
+                ref: '#/components/schemas/LessonsRequestsBodies'
             )
         ),
-        tags:["lessons"],
-        parameters:[
+        tags: ["lessons"],
+        parameters: [
             new OA\Parameter(
-                name:"lessonId",
-                description:"Update lesson",
-                in:"path",
-                required:true,
-            )],
+                name: "lessonId",
+                description: "Update lesson",
+                in: "path",
+                required: true,
+            )
+        ],
         responses: [
             new OA\Response(
                 response: 200,
                 description: 'ok',
                 content: new OA\JsonContent(
-                    properties: [
-                        new OA\Property(property:"lessonId", type:"integer", example:"3"),
-                        new OA\Property(property:"name", type:"string", example:"Zula Ferry"),
-                        new OA\Property(property:"description", type:"string", example:"Et qui aliquam deleniti non dolorem. Dolore incidunt magni eveniet eius in ut qui. Praesentium impedit ut velit magni nostrum.")
-
-                    ]
-                ))]
+                    ref: '#/components/schemas/LessonResponse'
+                )
+            )
+        ]
     )]
-
-    public function UpdateLesson( Request $request, $lessonsId){
-        $lessons=Lesson::query()->findOrFail($lessonsId);
-        $lessons->update([
-            'name'=>$request->input('name'),
-            'description'=>$request->input('description'),
-        ]);
-        return response()->json($request);
+    public function updateLesson(LessonRequst $request, int $lessonsId): JsonResponse
+    {
+        $lessonDTO = new LessonDTO();
+        $lessonDTO->buildFromArray($request->validated());
+        $lesson = $this->lessonService->update($lessonsId, $lessonDTO);
+        return response()->json(['data' => $lesson]);
     }
-
 
     #[OA\Delete(
-        path:"/api/lessons/{lessonId}",
-        summary:"Delete lesson",
-        tags:["lessons"],
-        parameters:[
+        path: "/api/lessons/{lessonId}",
+        summary: "Delete lesson",
+        tags: ["lessons"],
+        parameters: [
             new OA\Parameter(
-                name:"lessonId",
-                description:"Delete lesson",
-                in:"path",
-                required:true,
-            )],
+                name: "lessonId",
+                description: "Delete lesson",
+                in: "path",
+                required: true,
+            )
+        ],
         responses: [
             new OA\Response(
                 response: 200,
                 description: 'ok',
                 content: new OA\JsonContent(
-                    properties: [
-                        new OA\Property(property:"message", type:"string", example:"удалено"),
 
-                    ]
-                ))]
+                    ref: '#/components/schemas/DeleteCoursesResponse'
+                )
+            )
+        ]
     )]
-
-    public function DeleteLesson($lessonsId){
-        $lessons=Lesson::query()->findOrFail($lessonsId)->delete();
-        return response()->json(['massage'=>'удалено']);
+    public function deleteLesson(int $lessonsId): JsonResponse
+    {
+        $lessons = $this->lessonService->delete($lessonsId);
+        return response()->json(['data' => $lessons]);
     }
-
-
 
 }

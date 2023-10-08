@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Course;
 use App\Models\Lesson;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -18,9 +19,11 @@ class LessonFactory extends Factory
      */
     public function definition(): array
     {
+        $course = Course::pluck('course_id')->random();
         return [
             'name'=>fake()->name(),
             'description'=>fake()->text(),
+            'course_id'=>$course,
         ];
     }
 }

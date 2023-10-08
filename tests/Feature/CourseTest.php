@@ -14,57 +14,65 @@ class CourseTest extends TestCase
     /**
      * A basic feature test example.
      */
-    /**@test */
+/**@test*/
     public function testCreateCourse(): void
     {
         $this->withoutExceptionHandling();
-        $data = [
-            'name' => 'php',
-            'description' => 'php database'
+        $data=[
+            'name'=>'php',
+            'description'=>'php database'
         ];
         $response = $this->post('/api/courses', $data);
-        $this->assertDatabaseCount('courses', 1);
-        $courses = Course::first();
+        $this->assertDatabaseCount('courses',1);
+        $courses= Course::first();
 
-        $this->assertEquals($data['name'], $courses->name);
-        $this->assertEquals($data['description'], $courses->description);
+        $this->assertEquals($data['name'],$courses->name);
+        $this->assertEquals($data['description'],$courses->description);
         $response->assertStatus(200)->assertJsonCount(1);
+
     }
 
     public function testIndexCourse(): void
     {
+
         $response = $this->call('get', '/api/courses');
         $response->assertStatus(200)->assertJsonCount(1);
     }
 
 
-    public function testViewCourse(): void
-    {
 
-        $courses = Course::factory()->create();
+
+    public function testVirwCourse(): void
+    {
+//
+        $courses= Course::factory()->create();
         $response = $this->get("/api/courses/{$courses->course_id}");
         $response->assertStatus(200)->assertJsonCount(1);
-
+//
     }
+
+
 
 
     public function testDeleteCourse(): void
     {
-        $course = CourseFactory::new()->create();
+        $course   = CourseFactory::new()->create();
         $response = $this->delete("/api/courses/{$course->course_id}");
         $response->assertStatus(200);
         $this->assertDatabaseMissing('courses', ['course_id' => $course->course_id]);
+
     }
+
+
 
     public function testCourseUpdate(): void
     {
         $this->withoutExceptionHandling();
-        $courses = CourseFactory::new()->create();
-        $data = [
-            'name' => 'php',
-            'description' => 'php database'
+        $courses=  CourseFactory::new()->create();
+        $data=[
+            'name'=>'php',
+            'description'=>'php database'
         ];
-
 
         $response = $this->put("/api/courses/{$courses['course_id']}", $data);
         $this->assertDatabaseCount('courses', 1);
@@ -73,8 +81,9 @@ class CourseTest extends TestCase
         $this->assertEquals($data['name'], $coursesUpdate['name']);
         $this->assertEquals($data['description'], $coursesUpdate['description']);
         $this->assertEquals($courses['course_id'], $coursesUpdate['course_id']);
-    }
 
+
+    }
 
 
 }

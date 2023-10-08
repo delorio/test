@@ -144,7 +144,6 @@ class CoursesController extends Controller
             )
         ]
     )]
-
     public function UpdateCourse( int $courseId, CourseRequest $request)
     {
         $courseDTO = new CourseDTO();
@@ -171,6 +170,10 @@ class CoursesController extends Controller
                 response: 200,
                 description: 'ok',
                 content: new OA\JsonContent(
+//                    properties: [
+//                        new OA\Property(property: "message", type: "string", example: "удалено"),
+//
+//                    ]
                     ref: '#/components/schemas/DeleteCoursesResponse'
                 )
             )

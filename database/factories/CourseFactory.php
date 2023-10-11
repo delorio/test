@@ -23,6 +23,8 @@ class CourseFactory extends Factory
             'description'=>$this->faker->text(),
         ];
 
+
     }
+
 
 }

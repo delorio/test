@@ -47,6 +47,7 @@ class CourseTest extends TestCase
 
     }
 
+
     public function testDeleteCourse(): void
     {
         $course = CourseFactory::new()->create();

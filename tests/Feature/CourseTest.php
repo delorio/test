@@ -33,6 +33,9 @@ class CourseTest extends TestCase
 
     public function testIndexCourse(): void
     {
+
+
+
         $response = $this->call('get', '/api/courses');
         $response->assertStatus(200)->assertJsonCount(1);
     }
